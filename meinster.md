@@ -23,3 +23,9 @@ index.js 入口文件，其会引入App组件，并渲染到root节点上
 reportWebVitals.js 用于性能记录
 
 setUpTests.js 进行整体测试的框架的配置文件
+
+三、第一个组件
+因此需要进行编辑的文件也就三个
+index.html  主页面
+App.js      APP组件
+index.js    入口文件
