@@ -29,3 +29,17 @@ setUpTests.js 进行整体测试的框架的配置文件
 index.html  主页面
 App.js      APP组件
 index.js    入口文件
+
+如果控制台有warning应该就是18版本，教程是17版本，降版本的话在终端运行 npm install react@17.x react-dom@17.x --save
+
+//【组件】与【带有业务逻辑的js】不能都用js结尾，容易区分不开
+// 有两种方法来增加辨识度：1、组件后缀改为jsx 2、组件的名称大写
+其中App.js可以不改，它的优先级比较高
+
+src/components/组件名/index.js+index.css
+
+import 组件的时候 如果是js或者jsx就可以省略后缀名，而只需要写入组件名即可
+![alt text](./assets/01_image.png)
+
+这种情况下的引入有点麻烦，可以使用index来将引入路径变小
+在各个组件文件夹下将主体.jsx命名为index.jsx，然后在引入中就不再需要声明两次组件名，index相关的jsx会被自动import
