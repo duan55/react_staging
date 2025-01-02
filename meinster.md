@@ -55,3 +55,10 @@ rcc = react class component
 rcf = react functional component
 
 因为public内容相对固定，所以现在可以只独立存储src的内容
+
+四、组件固定结构
+public：index.html+favicon.ico
+src:
+-components(存放各个组件的文件夹)
+ App.jsx
+ index.js
