@@ -53,3 +53,5 @@ css模块化：
 ES7+ React/Redux/React-Native snippets的扩展插件安装使用
 rcc = react class component
 rcf = react functional component
+
+因为public内容相对固定，所以现在可以只独立存储src的内容
