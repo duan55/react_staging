@@ -49,3 +49,7 @@ css模块化：
 将index.css文件改名为index.module.css，然后在jsx文件中引入 import style from './index.module.css';
 此处引入之后将其内容作为对象存到了style对象中
 那之后该组件的样式就能通过style对象来调度，而不会造成全局污染了
+
+ES7+ React/Redux/React-Native snippets的扩展插件安装使用
+rcc = react class component
+rcf = react functional component
