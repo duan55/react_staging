@@ -46,5 +46,6 @@ import 组件的时候 如果是js或者jsx就可以省略后缀名，而只需�
 
 css模块化：
 防止css中的样式被全局污染(命名重复)，可以使用css module；
-将index.css文件改名为index.module.css，然后在jsx文件中引入 import styles from './index.module.css';
-那之后该组件的样式就能通过styles对象来调度，而不会造成全局污染了
+将index.css文件改名为index.module.css，然后在jsx文件中引入 import style from './index.module.css';
+此处引入之后将其内容作为对象存到了style对象中
+那之后该组件的样式就能通过style对象来调度，而不会造成全局污染了
