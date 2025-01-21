@@ -10,7 +10,7 @@ export default class App extends Component {
     //初始化状态
     state = {
         todos: [
-            { id: 1, text: '吃饭', done: false },
+            { id: 1, text: '吃饭', done: true },
             { id: 2, text: '睡觉', done: false },
             { id: 3, text: '写代码', done: false }
         ]
@@ -24,7 +24,7 @@ export default class App extends Component {
 
                     <Header />
 
-                    <List todos={todos} />
+                    <List todos = { todos } />
 
                     <Footer/>
 
