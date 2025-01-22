@@ -129,5 +129,5 @@ src:
   let x ={aa:1,bb:2} delete x.aa
   if(confirm('确认删除该条记录吗？')){
       this.props.deleteTodo(id)
-    }
+  }
 
