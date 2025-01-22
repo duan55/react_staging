@@ -7,7 +7,9 @@ export default class Item extends Component {
   //对接收的props进行: 类型 & 必要性的限制
   static propTypes = {
     //限制{updateTodo}为一个[必传]的[函数]
-    updateTodo: PropTypes.func.isRequired
+    updateTodo: PropTypes.func.isRequired,
+    //
+    deleteTodo: PropTypes.func.isRequired
   }
 
   state = { mouse: false } //鼠标移入移出状态
@@ -32,6 +34,14 @@ export default class Item extends Component {
     }
   }
 
+  //删除todo的回调函数 如果不想使用柯里化或者高阶函数 可以在这里直接使用箭头函数，使得其直接返回一个函数 而不需要再在回调函数声明的时候再进行函数的返回
+  handleDeleteTodo = (id) => {
+    //自带的confirm弹窗,18版本之前需要加上window => if(window.confirm('确认删除该条记录吗？'))
+    if(confirm('确认删除该条记录吗？')){
+      this.props.deleteTodo(id)
+    }
+  }
+
   render() {
     const { id, text, done } = this.props
     const { mouse } = this.state
@@ -43,7 +53,7 @@ export default class Item extends Component {
           {/* <span>{id}==&gt;{text}</span> */}
           <span>&gt;{text}</span>
         </label>
-        <button className="btn btn-danger" style={{ display: mouse ? 'block' : 'none' }}>删除</button>
+        <button onClick={() => { this.handleDeleteTodo(id) }} className="btn btn-danger" style={{ display: mouse ? 'block' : 'none' }}>删除</button>
       </li>
     )
   }

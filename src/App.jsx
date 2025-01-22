@@ -26,7 +26,7 @@ export default class App extends Component {
         //将新todo对象添加到todos数组的最前方
         const newTodos = [todoObj, ...todos]
         //更新状态
-        this.setState({ todos:newTodos })
+        this.setState({ todos: newTodos })
     }
 
     //Item组件更新done状态，需要App组件先传递给Item的父组件List，再由List传递给Item
@@ -34,9 +34,20 @@ export default class App extends Component {
         //获取状态中的todos
         const { todos } = this.state
         //遍历todos数组，找到对应id的todo对象，更新done属性
-        const newTodos = todos.map(todoObj => {
-            if (todoObj.id === id) return {...todoObj, done:newDone }
+        const newTodos = todos.map((todoObj) => {
+            if (todoObj.id === id) return { ...todoObj, done: newDone }
             else return todoObj
+        })
+        this.setState({ todos: newTodos })
+    }
+
+    deleteTodo = (id) => {
+        //获取状态中的todos
+        const { todos } = this.state
+        //遍历todos数组，过滤删除对应的done对象
+        const newTodos = todos.filter((todoObj) => {
+            //当id不同的场合才会被保留，否则被删除
+            return (todoObj.id !== id) 
         })
         this.setState({ todos: newTodos })
     }
@@ -47,11 +58,11 @@ export default class App extends Component {
             <div className="todo-container">
                 <div className="todo-wrap">
 
-                    <Header addTodo = { this.addTodo } />
+                    <Header addTodo={this.addTodo} />
 
-                    <List todos = { todos } updateTodo = { this.updateTodo } />
+                    <List todos={todos} updateTodo={this.updateTodo} deleteTodo={this.deleteTodo} />
 
-                    <Footer/>
+                    <Footer />
 
                 </div>
             </div>
