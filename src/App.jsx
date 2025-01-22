@@ -16,13 +16,25 @@ export default class App extends Component {
         ]
     }
 
+    //用于接受子组件Header传递的todo对象
+    addTodo = (todoObj) => {
+        //子组件调用也还是父组件的this
+        console.log(this.state)
+        //获取原todos
+        const { todos } = this.state
+        //将新todo对象添加到todos数组的最前方
+        const newTodos = [todoObj, ...todos]
+        //更新状态
+        this.setState({ todos:newTodos })
+    }
+
     render() {
         const { todos } = this.state
         return (
             <div className="todo-container">
                 <div className="todo-wrap">
 
-                    <Header />
+                    <Header addTodo = { this.addTodo } />
 
                     <List todos = { todos } />
 

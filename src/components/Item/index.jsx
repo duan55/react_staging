@@ -8,7 +8,8 @@ export default class Item extends Component {
       <li>
         <label>
           <input type="checkbox" defaultChecked = {done}/>
-          <span>{id}==&gt;{text}</span>
+          {/* <span>{id}==&gt;{text}</span> */}
+          <span>&gt;{text}</span>
         </label>
         <button className="btn btn-danger" style={{ display: 'none' }}>删除</button>
       </li>

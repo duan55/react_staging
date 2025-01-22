@@ -79,4 +79,15 @@ src:
 
   现在一个父组件中的两个兄弟组件通信需要使用消息订阅与发布，但是没有学习，于是曲线救国去控制父组件的state状态
 
-  
+  组件间通信：
+  现在需要将Header的值传递给App，更新其todos从而使得List中的Item  得到更新
+  子组件想要给父组件传值，需要父组件给子组件一个回调函数，然后在子组件的事件中调用该回调函数，将值传给父组件
+
+  id使用uuid生成 或者 小号版本 nanoid
+  import {nanoid} from 'nanoid' 那之后每次使用nanoid都会给一个全球唯一的id
+
+  p58逻辑：
+  App中的state会给到List中使用，而Header需要将用户输入的值给到List中；
+  由于目前尚未知晓子组件之间通信的方式，
+  现在让父组件App传递回调函数到子组件Header中，Header使用回调函数更新App中的state，
+  App状态更新就需要重新调用render，而List是App的子组件，所以List的render函数也会被调用
