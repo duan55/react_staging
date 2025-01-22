@@ -91,3 +91,17 @@ src:
   由于目前尚未知晓子组件之间通信的方式，
   现在让父组件App传递回调函数到子组件Header中，Header使用回调函数更新App中的state，
   App状态更新就需要重新调用render，而List是App的子组件，所以List的render函数也会被调用
+
+20250122 关于鼠标移动与背景高亮的实践
+  state = {mouse:false}
+  handleMouse = (isEnter) => {
+    return () => {
+      //返回值不写成函数的话，打开页面时就会触发那些事件函数
+      this.setState({mouse:isEnter})  
+    }
+  }
+  框的高亮显示
+  <li style={{backgroundColor:this.state.mouse?'#ddd':'#fff'}} 灰&白
+  onMouseEnter={this.handleMouse(true)} onMouseLeave={this.handleMouse(false)}>
+  删除按钮的显示
+  <button style={{ display: mouse? 'block' : 'none' }}>删除</button>
