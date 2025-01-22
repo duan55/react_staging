@@ -49,7 +49,7 @@ export default class Item extends Component {
       //设置【高亮背景色(灰/白)】与鼠标移入移出触发函数
       <li style={{ backgroundColor: mouse ? '#ddd' : '#fff' }} onMouseEnter={this.handleMouse(true)} onMouseLeave={this.handleMouse(false)}>
         <label>
-          <input type="checkbox" defaultChecked={done} onChange={this.handleCheckBoxChange(id)} />
+          <input type="checkbox" checked={done} onChange={this.handleCheckBoxChange(id)} />
           {/* <span>{id}==&gt;{text}</span> */}
           <span>&gt;{text}</span>
         </label>

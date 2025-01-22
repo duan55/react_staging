@@ -52,6 +52,25 @@ export default class App extends Component {
         this.setState({ todos: newTodos })
     }
 
+    //全选或反选checkbox的回调函数
+    checkAll = (flag) => {
+        const { todos } = this.state
+        const newTodos = todos.map((todoObj) => {
+            return { ...todoObj, done: flag }
+        })
+        this.setState({ todos: newTodos })
+    }
+
+    //清空已完成任务的回调函数
+    clearAll = () => {
+        const { todos } = this.state
+        const newTodos = todos.filter((todoObj) => {
+            //当没有完成的任务才会被保留，否则被过滤(删除)
+            return (todoObj.done !== true) 
+        })
+        this.setState({ todos: newTodos })
+    }
+
     render() {
         const { todos } = this.state
         return (
@@ -62,7 +81,7 @@ export default class App extends Component {
 
                     <List todos={todos} updateTodo={this.updateTodo} deleteTodo={this.deleteTodo} />
 
-                    <Footer />
+                    <Footer todos={todos} checkAll={this.checkAll} clearAll={this.clearAll} />
 
                 </div>
             </div>

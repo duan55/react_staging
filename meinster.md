@@ -131,3 +131,9 @@ src:
       this.props.deleteTodo(id)
   }
 
+  p63 
+  Footer组件
+  reduce用于数组计数统计：条件统计、条件求和、筛选最值  
+  defaultChecked只在页面第一次渲染的时候进行一次生效，那之后需要使用onChange来切换对应checkbox或者说其他组件的状态
+  也就是说一般情况下都会使用checked来保证可以通过其他的状态决定来【被动】切换checkbox状态，但也要有不通过其他状态的场合下使用onChange来【直接】切换
+
