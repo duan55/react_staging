@@ -84,15 +84,19 @@ src:
   子组件想要给父组件传值，需要父组件给子组件一个回调函数，然后在子组件的事件中调用该回调函数，将值传给父组件
 
   id使用uuid生成 或者 小号版本 nanoid
+  npm i nanoid
+  npm i uuid
   import {nanoid} from 'nanoid' 那之后每次使用nanoid都会给一个全球唯一的id
 
-  p58逻辑：
+  p58
+  逻辑：
   App中的state会给到List中使用，而Header需要将用户输入的值给到List中；
   由于目前尚未知晓子组件之间通信的方式，
   现在让父组件App传递回调函数到子组件Header中，Header使用回调函数更新App中的state，
   App状态更新就需要重新调用render，而List是App的子组件，所以List的render函数也会被调用
 
-20250122 关于鼠标移动与背景高亮的实践
+  p59
+  20250122 关于鼠标移动与背景高亮的实践
   state = {mouse:false}
   handleMouse = (isEnter) => {
     return () => {
@@ -105,3 +109,19 @@ src:
   onMouseEnter={this.handleMouse(true)} onMouseLeave={this.handleMouse(false)}>
   删除按钮的显示
   <button style={{ display: mouse? 'block' : 'none' }}>删除</button>
+
+  p60
+  状态在哪里，操作状态的方法就在哪里
+  哪怕触发函数的组件是孙组件，也要在对应的真实爷组件中声明回调函数，再自上而下逐级传递到孙组件
+
+  p61
+  npm i prop-types
+  对传递的props进行类型检查，防止传入错误的类型
+  import PropTypes from 'prop-types';
+  static propTypes = {
+    //限制{addTodo}为一个[必传]的[函数]
+    addTodo: PropTypes.func.isRequired
+  }
+
+  p62
+

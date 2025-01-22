@@ -1,9 +1,17 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import {nanoid} from 'nanoid'
 import './index.css'
 
 export default class Header extends Component {
 
+  //对接收的props进行: 类型 & 必要性的限制
+  static propTypes = {
+    //限制{addTodo}为一个[必传]的[函数]
+    addTodo: PropTypes.func.isRequired
+  }
+
+  //键盘按键事件的回调函数
   handleKeyUp = (event) => {
     //获取按下的键是哪一个,event.keyCode是按键的ASCII码已经要被废除了
     // console.log(event.target.value, event.keyCode)

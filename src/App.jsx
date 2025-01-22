@@ -6,6 +6,7 @@ import Footer from './components/Footer'
 
 //修改了class -> className && style="" -> style={{}}
 export default class App extends Component {
+    //状态在哪里，操作状态的方法就在哪里
 
     //初始化状态
     state = {
@@ -28,6 +29,18 @@ export default class App extends Component {
         this.setState({ todos:newTodos })
     }
 
+    //Item组件更新done状态，需要App组件先传递给Item的父组件List，再由List传递给Item
+    updateTodo = (id, newDone) => {
+        //获取状态中的todos
+        const { todos } = this.state
+        //遍历todos数组，找到对应id的todo对象，更新done属性
+        const newTodos = todos.map(todoObj => {
+            if (todoObj.id === id) return {...todoObj, done:newDone }
+            else return todoObj
+        })
+        this.setState({ todos: newTodos })
+    }
+
     render() {
         const { todos } = this.state
         return (
@@ -36,7 +49,7 @@ export default class App extends Component {
 
                     <Header addTodo = { this.addTodo } />
 
-                    <List todos = { todos } />
+                    <List todos = { todos } updateTodo = { this.updateTodo } />
 
                     <Footer/>
 
