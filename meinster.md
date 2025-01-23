@@ -217,3 +217,7 @@ module.exports = function(app) {
         })
     );
 };
+
+p67
+成型的样式库最好放到public/css中;并在index.html中引入<link rel="stylesheet" href="./css/bootstrap.css">
+组件拆分的时候，如果对css进行组件拆分，则需要对审查元素进行查看来分解样式
