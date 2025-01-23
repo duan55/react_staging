@@ -148,3 +148,49 @@ src:
   -2.【子组件】给【父组件】传递数据：通过props传递，要求父组件给子组件提供一个函数(类似于重写继承)
   4.注意defaultChecked 和 checked 的区别，类似的还有：defaultValue、value
   5.状态在哪里，操作状态的方法就在哪里？
+
+  五、react ajax
+  1.前置说明
+  1)React本身只关注于界面，并不包含发送ajax请求的代码
+  2)前端应用需要通过ajax请求与后台进行交互(json数据)
+  3)react应用中需求集成第三方ajax库(或自己封装) -> 自己封装的请学习【sgg:ajax请求课程】，一般情况下不会自己封装(耗时且不完善)<-造轮子
+  
+  2.常用的ajax请求库
+  1)JQuery：比较重，如果需要另外引入，不建议；
+  因为使用react就需要尽可能减少自己去操作dom，只需要改数据更新状态让react去转化为虚拟dom转化真实dom渲染在页面
+  而JQuery就是专门操作dom的库，所以不建议使用
+  2)axios：轻量级，功能丰富，使用起来也比较方便，推荐使用
+  a.封装XmlHttpRequest请求对象的ajax
+  b.promise风格
+  c.可以用在浏览器端和node服务器端
+
+  npm i axios
+  node server1.js
+
+  3.跨域问题
+  跨域问题 localhost3000(client)与5000(server)的通信
+  产生跨域本质问题是ajax引擎把响应拦截了，而中间的代理服务器(端口与client一致)是通过请求转发(没有ajax引擎，同源策略不会限制它)，获取到值之后再给到client
+
+  4.react中的代理模式
+  4.1配置代理解决跨域
+  package.json中配置proxy字段：
+  "proxy": "http://localhost:5000"
+在client端通过axios请求http://localhost:3000/api/xxx，会去先检索本机/api/xxx是否存在，不存在则会请求http://localhost:5000/api/xxxserver端的接口
+但是这样比较死板，想一下微服务这种情况，似乎不够灵活
+
+// ,"proxy": "http://localhost:5000" 现在会报错：
+  npm start
+
+> react_staging@0.1.0 start
+> react-scripts start
+
+Invalid options object. Dev Server has been initialized using an options object that does not match the API schema.
+ - options.allowedHosts[0] should be a non-empty string.
+
+//换成这个又不生效
+ ,
+  "options": {
+    "allowedHosts":["localhost",".localhost"],
+    "proxy":"http://localhost:5000"
+  }
+
