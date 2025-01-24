@@ -272,3 +272,14 @@ PubSub.publish('msg', 'hello world');
     componentWillUnmount() {
         PubSub.unsubscribe(this.token)
     }
+
+p72
+ajax请求的发送
+xhr(XMLHttpRequest)-jQuery(封装度高，但是回调地狱)
+                   -axios(promise风格，解决回调地狱)
+                   但实际上这两者都是对xhr的封装(服务器端没有xhr，所以服务器端的axios不是对xhr的封装而是http)
+
+fetch promise风格，不需要xhr也能发送ajax请求，而且是内置的不需要下载安装
+文档:
+https://github.github.io/fetch/   挂了404
+https://segmentfault.com/a/1190000003810652
