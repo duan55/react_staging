@@ -221,3 +221,13 @@ module.exports = function(app) {
 p67
 成型的样式库最好放到public/css中;并在index.html中引入<link rel="stylesheet" href="./css/bootstrap.css">
 组件拆分的时候，如果对css进行组件拆分，则需要对审查元素进行查看来分解样式
+
+p68
+axios访问中间层服务器:5000->githubAPI
+多层解构赋值详解
+
+p69
+将Search查询到的数据交予List组件，List组件将数据渲染到页面上
+
+//Warning: Each child in a list should have a unique "key" prop.
+//要在【map遍历的最外侧的结构上】加上key属性，一般使用id比较好

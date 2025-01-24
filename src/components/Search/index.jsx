@@ -15,7 +15,8 @@ export default class search extends Component {
         // axios.get(`http://localhost:3000/api1/search/users?q=${keyword}`).then( 发送的位置就是访问的位置，则http://ip+端口可以不写
         axios.get(`/api1/search/users?q=${keyword}`).then(
             response => {
-                console.log('成功了',response.data)
+                console.log('成功了')
+                this.props.saveUsers(response.data.items)
             },
             error => {
                 console.log('失败了',error)
