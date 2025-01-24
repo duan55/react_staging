@@ -256,3 +256,19 @@ import PubSub from 'pubsub-js';
 PubSub.subscribe('msg', function(msg, data){});
 3)发布消息
 PubSub.publish('msg', 'hello world');
+
+4)原则
+在需要接受数据的组件(接受方、订阅方)里订阅消息，在发送数据的组件(发布方)里发布消息
+
+    //即将挂载时订阅
+    componentDidMount() {
+        //可以使用下划线占位，因为msg实际上已经传递了，(_, data)
+        this.token = PubSub.subscribe('github user info',(msg,stataObj)=>{
+            this.setState(stataObj)
+        })
+    }
+
+    //组件将要卸载时取消订阅
+    componentWillUnmount() {
+        PubSub.unsubscribe(this.token)
+    }
