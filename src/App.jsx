@@ -5,20 +5,24 @@ import List from './components/List'
 
 export default class App extends Component {
 
-  //初始化状态，users为数组
-  state = { users:[] }
+  //初始化状态
+  state = { 
+    users:[], //users为数组 
+    isFirst: true, //用于判断是否是第一次加载页面
+    isLoading: false, //用于判断是否正在加载数据
+    error:'' //存放错误信息
+  }
 
   //存入Search组件查询得到的用户数据
-  saveUsers = (users) => {
-    this.setState({ users })
+  updateAppState = (stateObj) => {
+    this.setState(stateObj)
   }
 
   render() {
-    const { users } = this.state
     return (
       <div className="container">
-        <Search saveUsers={this.saveUsers}/>
-        <List users={users}/>
+        <Search updateAppState={this.updateAppState}/>
+        <List {...this.state}/>
       </div>
     )
   }

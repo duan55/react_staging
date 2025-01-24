@@ -231,3 +231,13 @@ p69
 
 //Warning: Each child in a list should have a unique "key" prop.
 //要在【map遍历的最外侧的结构上】加上key属性，一般使用id比较好
+
+p70
+优化用户体验:
+List组件的显示内容分为三种:{
+  1、Search查询并通过App传递给List组件的用户信息
+  2、没有开始查询的欢迎界面
+  3、查询中的加载中提示界面
+
+  4、error状态下的错误提示界面
+}
