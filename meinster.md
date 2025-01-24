@@ -241,3 +241,18 @@ List组件的显示内容分为三种:{
 
   4、error状态下的错误提示界面
 }
+jsx中的if-else:三元表示式嵌套
+
+p71 消息订阅与发布机制
+兄弟组件之间的交互
+
+|Publish-Subscribe-JS库|https://github.com/mroderick/PubSubJS
+1、pubsub-js库的下载
+npm i pubsub-js --save
+2、pubhub-js库的使用
+1)引入
+import PubSub from 'pubsub-js';
+2)订阅
+PubSub.subscribe('msg', function(msg, data){});
+3)发布消息
+PubSub.publish('msg', 'hello world');
