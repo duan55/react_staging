@@ -396,5 +396,14 @@ p73 github搜索案例总结
             PubSub.publish('github user info', { isFirst: false, isLoading: false, error: error.message })
         }
 
+五、React路由
+p74 
+1.SPA的理解：
+1.1 单页Web应用(single page web application, SPA)
+1.2 整个应用只有一个完整的页面
+1.3 点击页面中的链接不会刷新页面，只会做页面的局部刷新
+1.4 数据都需要通过ajax请求获取，并在前端异步展现
+
+开发的spa应用是单页面多组件
 
 
