@@ -283,3 +283,5 @@ fetch promise风格，不需要xhr也能发送ajax请求，而且是内置的不
 文档:
 https://github.github.io/fetch/   挂了404
 https://segmentfault.com/a/1190000003810652
+
+关注分离的思想，访问服务器之后会提示链接服务器成功了

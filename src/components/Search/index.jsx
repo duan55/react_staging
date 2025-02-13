@@ -5,8 +5,8 @@ import PubSub from 'pubsub-js'
 
 export default class search extends Component {
 
-    //用户搜索
-    searchUser = () => {
+    //用户搜索(使用axios)
+    searchUserAxios = () => {
         //1.获取用户的输入，button绑定了事件但是要获取input的输入需要使用ref、受控组件表单
         //连续解构赋值直接获取到value并将其重命名为keyword，但是后文如果去取inputSth则会提示并没有解构得到inputSth
         const { inputSth: { value: keyword } } = this
@@ -25,6 +25,28 @@ export default class search extends Component {
                 //通知List更新state
                 //此处不能直接存入错误对象，而是要存入错误对象的属性
                 PubSub.publish('github user info', { isFirst: false, isLoading: false, error: error.message })
+            }
+        )
+    }
+
+    //用户搜索(使用fetch)
+    searchUser = () => {
+        //1.获取用户的输入
+        const { inputSth: { value: keyword } } = this
+        //1.2 发送请求前通知List更新state
+        PubSub.publish('github user info', { isFirst: false, isLoading: true, error: null })
+        //2.发送网络请求
+        fetch(`/api1/search/users12?q=${keyword}`).then(
+            response => {
+                //404也算联系成功，只要是有响应都算链接成功
+                console.log('链接服务器成功',response)
+                //通知List更新state
+                // PubSub.publish('github user info', { isFirst: false, isLoading: false, users: response.data.items })
+            },
+            error => {
+                console.log('链接服务器失败',error)
+                //通知List更新state
+                // PubSub.publish('github user info', { isFirst: false, isLoading: false, error: error.message })
             }
         )
     }
