@@ -284,4 +284,67 @@ fetch promise风格，不需要xhr也能发送ajax请求，而且是内置的不
 https://github.github.io/fetch/   挂了404
 https://segmentfault.com/a/1190000003810652
 
-关注分离的思想，访问服务器之后会提示链接服务器成功了
+关注分离的思想，访问服务器之后会提示链接服务器成功了，即使这个url地址在服务器中对应的接口是不存在的(404)，也会提示"链接"这个动作成功(只到服务器)
+只有出现类似于"断网"的情况，让服务器与浏览器无法正常连通的情况下，才会出现error提示报错
+
+response.json() 返回 Promise实例 {<pending>} 该实例的状态会在链接服务器成功的前提下，再根据是否正常获取到数据来决定
+要进一步获取 返回的值 或者 失败的原因 需要使用 .then()
+.then 能够链式调用的一个原因就是其返回值也可以是一个Promise实例对象从而再次被.then使用
+如果上一级返回不是一个promise实例，那么状态就默认为成功，值就为非promise值
+如果是一个promise实例，则状态和值都与其一致，将作为下一个.then的promise入参进行使用，如抛出一个异常，则状态就为异常 且 值为错误的原因
+
+//如果失败error的回调输出一行字，那么下面的.then不会进到error中，因为会返回undefined(非promise值)状态为成功 其会进入到response路线中，因此需要return new Promise(()=>{}) 返回一个初始化状态的promise实例让后面的then进入到error分支中
+
+    //用户搜索(使用fetch)
+    searchUser = () => {
+        //1.获取用户的输入
+        const { inputSth: { value: keyword } } = this
+        //1.2 发送请求前通知List更新state
+        PubSub.publish('github user info', { isFirst: false, isLoading: true, error: null })
+        //2.发送网络请求
+        fetch(`/api1/search/users2?q=${keyword}`).then(
+            response => {
+                //404也算联系成功，只要是有响应都算链接成功
+                console.log('链接服务器成功',response)
+                //通知List更新state
+                //PubSub.publish('github user info', { isFirst: false, isLoading: false, users: response.data.items })
+                //如果链接到服务器成功，则调用json方法
+                return response.json()
+            },
+            error => {
+                console.log('链接服务器失败',error)//如果失败的回调输出一行字，那么下面的then不会进到error中，因为会返回undefined(非promise值)状态为成功
+                //手工中断
+                return new Promise(()=>{})
+                //通知List更新state
+                // PubSub.publish('github user info', { isFirst: false, isLoading: false, error: error.message })
+            }
+        ).then(
+            //.then 能够链式调用的一个原因就是其返回值也可以是一个Promise实例对象从而再次被.then使用
+            //如果上一级返回不是一个promise实例，那么状态就默认为成功，值就为非promise值
+            //如果是一个promise实例，则状态和值都与其一致，将作为下一个.then的promise入参进行使用，如抛出一个异常，则状态就为异常 且 值为错误的原因
+            response => {
+                console.log("获取数据成功", response)
+            },
+            error => {
+                console.log("获取数据失败", error)
+            }
+        )
+    }
+
+注意到上述的写法中fetch().then().then() error的处理每个层级都有，非常的冗余，可以在最后使用catch进行错误的统一处理
+
+优化：
+1、统一catch处理错误
+2、链式调用简化 -> 使用async/await简化代码
+3、使用try-catch处理错误
+
+fetch使用频率一般，因为一些老浏览器不兼容fetch
+
+总结：
+1、fetch：原生函数，不再使用XMLHttpRequest对象提交ajax请求
+2、老版本浏览器可能不支持fetch
+3、在fecth之前想要发送ajax请求，只能使用XMLHttpRequest(XHR)对象，但是现在ajax请求可以使用 Fetch/XHR
+
+
+
+
