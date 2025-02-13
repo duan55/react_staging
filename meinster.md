@@ -345,6 +345,56 @@ fetch使用频率一般，因为一些老浏览器不兼容fetch
 2、老版本浏览器可能不支持fetch
 3、在fecth之前想要发送ajax请求，只能使用XMLHttpRequest(XHR)对象，但是现在ajax请求可以使用 Fetch/XHR
 
+p73 github搜索案例总结
+1.设计状态时要考虑全面，例如带有网络请求的组件，要考虑请求失败怎么办
+2.ES6小知识点：解构赋值+重命名
+    let obj = {a:{b:1}};
+    // 1. 传统解构赋值
+    const {a} = obj; 
+    // 等效于 const a = obj.a;
+    // 结果：a = {b:1}
+    // 2. 连续解构赋值
+    const {a: {b}} = obj;
+    // 等效于 const b = obj.a.b;
+    // 结果：b = 1（不会创建变量 a）
+    // 3. 连续解构+重命名
+    const {a: {b: value}} = obj;
+    // 等效于 const value = obj.a.b;
+    // 结果：value = 1（不会创建变量 a 和 b）
+
+3.消息订阅与发布机制
+ 0.引入pubsub-js库
+    import PubSub from 'pubsub-js'
+    //即将挂载时订阅
+    componentDidMount() {
+        //可以使用下划线占位，因为msg实际上已经传递了，(_, data)
+        this.token = PubSub.subscribe('keyWord',(msg, stataObj)=>{
+            this.setState(stataObj)
+        })
+    }
+    //组件将要卸载时取消订阅
+    componentWillUnmount() {
+        PubSub.unsubscribe(this.token)
+    }
+
+ 1.先订阅，再发布（理解：有一种隔空对话的感觉，其实就是消息队列的一种）
+ 2.适用于任意组件之间通信
+ 3.要在组件的componentWillUnmount中取消订阅
+
+4.fetch发送请求（关注分离的设计思想）
+        try
+        //使用await的时候 要在函数前加上async关键字
+        {   //await只会等到成功的结果，遇到错误会忽略 因此需要使用try...catch
+            const response = await fetch(`/api1/search/users2?q=${keyword}`)
+            //获取Promise中的value结果
+            const result = await response.json()
+            console.log("本次请求返回的结果为: ",result)
+            PubSub.publish('github user info', { isFirst: false, isLoading: false, users: result.items })
+        }
+        catch(error){
+            console.log("!什么东西出错了!!", error)
+            PubSub.publish('github user info', { isFirst: false, isLoading: false, error: error.message })
+        }
 
 
 

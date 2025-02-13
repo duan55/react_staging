@@ -117,7 +117,6 @@ export default class search extends Component {
             console.log("!什么东西出错了!!", error)
             PubSub.publish('github user info', { isFirst: false, isLoading: false, error: error.message })
         }
-
     }
 
     //键入回车直接搜索
