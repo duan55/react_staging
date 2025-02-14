@@ -422,4 +422,16 @@ p75 对路由的理解
 2.2 注册路由：<Route path="/path" component={Sth}>
 2.3 工作过程：当浏览器的path变为/path时，当前路由组件就会变为Sth组件
 
+p76 前端路由原理
+前端路由靠浏览器的历史记录(history)
 
+DOM 文档对象模型
+BOM 浏览器对象模型 <- history在这里 <- window就是BOM，window.history就是history对象
+由于原生的api操作BOM非常麻烦，可以使用history.js
+
+前端路由的基石_history.html 中有演示
+BOM是一个栈的结构，push是追加历史记录，而replace是替换当前历史记录
+所以后退是出栈pop，前进是入栈只不过这里会把之前pop的记录存下来
+
+锚点跳转 hash路由 ：
+# + 不刷新页面但产生历史记录
