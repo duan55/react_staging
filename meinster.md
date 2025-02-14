@@ -436,5 +436,37 @@ BOM是一个栈的结构，push是追加历史记录，而replace是替换当前
 锚点跳转 hash路由 ：
 # + 不刷新页面但产生历史记录
 
+react-router 5的理解
 p77 路由的基本使用
+
+三种实现给到不同的三个平台去使用：
+web    网页开发使用
+native react原生应用开发使用
+anywhere 任何地方
+
+react-router-dom@5的使用
+//20250214 npm install react-router-dom 默认安装是6版本
+//先学习使用 npm i react-router-dom@5 默认为5版本
+1.react的一个插件库
+2.专门用来实现一个SPA应用
+3.基于react的项目基本都会用到此库
+
+库的卸载安装
+npm uninstall react-router react-router-dom  卸载现有的库
+npm install react-router-dom@5 安装指定版本的库
+
+想要写好一个SPA(单页面'多组件'应用)，先找到导航区和展示区
+点击导航区->变更url路径->前端路由器检测到并匹配到对应的组件->渲染组件到展示区
+
+
+步骤：
+编写路由链接、注册路由
+{
+    错误1：
+        Link标签的外侧需要有Router标签管理(路由器)
+    错误2：
+        不同的Router之间通信存在问题，最好是直接将其包括在App组件外侧，即index.js中使用Router
+}
+
+
 
