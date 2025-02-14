@@ -397,7 +397,7 @@ p73 github搜索案例总结
         }
 
 五、React路由
-p74 
+p74 SPA的理解
 1.SPA的理解：
 1.1 单页Web应用(single page web application, SPA)
 1.2 整个应用只有一个完整的页面
@@ -405,5 +405,21 @@ p74
 1.4 数据都需要通过ajax请求获取，并在前端异步展现
 
 开发的spa应用是单页面多组件
+
+p75 对路由的理解
+路由：映射关系 key-value (key为路径，value可能是function或component)
+前端路由工作原理：
+点击导航栏区域变更浏览器中的url后半部分路径，有监测到url后半部分变化的路由组件，匹配到对应的组件，负责渲染组件到指定的展示区域，实现页面的局部刷新
+
+路由分类：
+1、后端路由：
+1.1 value是function，用来处理客户端提交的请求
+1.2 注册路由：router.get(path,function(req,res))
+1.3 工作过程：当node接收到一个请求时，根据请求路径找到匹配的路由，调用路由中的函数来处理请求，返回响应数据
+
+2、前端路由：
+2.1 value是component，用于展示页面内容
+2.2 注册路由：<Route path="/path" component={Sth}>
+2.3 工作过程：当浏览器的path变为/path时，当前路由组件就会变为Sth组件
 
 
