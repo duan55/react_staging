@@ -22,8 +22,8 @@ export default class App extends Component {
               {/* <a className="list-group-item active" href="./about.html">About</a>
               <a className="list-group-item" href="./home.html">Home</a> */}
               {/* 1、编写路由链接 在react中靠路由链接实现切换组件；注意Link需要被Router管理,但是如果多个地方都写了Router，其路由之间不能通信，所以可以直接将Router写在App组件外侧包裹所有，即直接在index.js中写Router*/}
-              <MyNavLink to="/duan55/about" children="About"/>
-              <MyNavLink to="/duan55/home"> Home </MyNavLink>
+              <MyNavLink to="/about" children="About"/>
+              <MyNavLink to="/home/a/b"> Home </MyNavLink>
             </div>
           </div>
           <div className="col-xs-6">
@@ -31,8 +31,8 @@ export default class App extends Component {
               <div className="panel-body">
                 {/* 2、注册路由 */}
                 <Switch>
-                  <Route path="/duan55/about" component={About} />
-                  <Route path="/duan55/home" component={Home} />
+                  <Route exact={true} path="/about" component={About} />
+                  <Route exact={true} path="/home" component={Home} />
                 </Switch>
               </div>
             </div>

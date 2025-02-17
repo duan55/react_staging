@@ -650,3 +650,19 @@ localhost:3000是脚手架内置的服务器，通过webpack-dev-server启动的
 3、使用HashRouter
 
 p83 路由的模糊匹配与严格匹配
+冷知识：
+npm i 与 yarn add 不要混用，容易造成包丢失
+
+模糊匹配：
+下面这种情况是无法匹配的
+<MyNavLink to="/home"> Home </MyNavLink>
+<Route path="/home/a/b/c" component={Home} />
+
+下面这种情况为模糊匹配，可以正常显示Home组件(符合最左前缀)
+<MyNavLink to="/home/a/b/c"> Home </MyNavLink>
+<Route path="/home" component={Home} />
+
+精准匹配(严格匹配)：
+需要在Route中增加属性 exact={true} 或 exact ，则会开启严格匹配，必须保证提供的路径与路由完全匹配才会渲染对应的组件
+
+但是严格匹配不推荐默认开启，当且仅当页面中的渲染显示出现问题的场合再开启
