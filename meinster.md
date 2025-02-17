@@ -643,3 +643,10 @@ localhost:3000是脚手架内置的服务器，通过webpack-dev-server启动的
 304表示访问缓存，使用强制刷新可以忽略缓存，重新请求资源，此时如果成功应该返回200
 
 目前比较推荐第一种，因为美团也没有使用第三种方式，HashRouter的使用场景比较少
+
+小结：
+1、public/index.html中引入样式时不写 ./ 写 /
+2、public/index.html中引入样式时不写 ./ 写 %PUBLIC_URL%  (仅适用于React的脚手架中)
+3、使用HashRouter
+
+p83 路由的模糊匹配与严格匹配
