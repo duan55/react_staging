@@ -583,3 +583,23 @@ activeClassName className 这两部分是保持不变的，只有to和提示词�
 即 <A {...this.props}>{this.props.children}</A>
 同理标签体也可以不写在两个标签开闭中，可以直接作为props属性的children传入
 <ComponentName 固定属性名1="指定属性值1" 固定属性名2="指定属性值2" ... {...this.props} />
+
+小结：
+1、NavLink可以实现路由链接的高亮，通过activeClassName指定样式名
+2、标签体内容是一个特殊的标签属性
+3、this.props.children可以获取标签体内容
+4、{...this.props}可以展开props属性并赋值到对应的项上
+
+p81 Switch的使用
+正常情况下，一个路由对应一个组件
+<Route path="/about" component={About} />
+<Route path="/home" component={Home} />
+<Route path="/home" component={Test} />
+但如果是这种情况，访问/home路径时，会渲染Home与Test组件(但是一般情况下，想要访问多个组件最好将其合并到一个组件中作为终端)
+但是正常情况下，一个路由对应一个组件，我们希望一旦匹配成功，就不再继续执行匹配(提高效率)
+可以使用Switch来实现，只需要将定义的Route包在其中，就可以初次匹配就break，从而提高效率
+<Switch>
+    <Route path="/about" component={About} />
+    <Route path="/home" component={Home} />
+    <Route path="/home" component={Test} />
+</Switch>
