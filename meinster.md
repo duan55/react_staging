@@ -671,4 +671,14 @@ npm i 与 yarn add 不要混用，容易造成包丢失
 1、默认使用的是模糊匹配：输入的路径对于路由要匹配的路径必须符合【最左】前缀的包含关系
 2、开启严格匹配：<Route path="/home" exact component={Home} />
 3、严格匹配不要随便开启，必须在模糊匹配影响到了页面显示的场合再开启，有的时候开启会导致无法继续匹配二级路由
-p84
+
+p84 Redirect的使用
+进入到网页的时候希望默认勾选一个组件进行显示，借助Redirect实现
+
+在Switch的注册路由中，如果所有的路由都没有匹配到，则会渲染Redirect组件，将其跳转到指定的路由
+<Switch>
+    <Route path="/home" component={Home} />
+    <Route path="/about" component={About} />
+    {/*兜底作用，如果过上述都为进行匹配则听由Redirect发配到/home*/}
+    <Redirect to="/home"/>
+</Switch>
