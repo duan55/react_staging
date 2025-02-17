@@ -603,3 +603,9 @@ p81 Switch的使用
     <Route path="/home" component={Home} />
     <Route path="/home" component={Test} />
 </Switch>
+
+小结：
+1、通常情况下，path和component是一一对应的
+2、单一匹配原则:Switch可以提高路由匹配的效率，只要匹配到第一个就不再继续匹配
+
+p82 解决样式丢失问题
