@@ -565,4 +565,21 @@ bootstrap在public中已经引入，其作为一个广泛使用的前端开发�
     </style>
 那之后css切换正确且流畅
 
-p80
+p80 封装NavLink组件
+试想一下：
+<NavLink activeClassName="chenhs" className="list-group-item" to="/home">Home</NavLink>
+如果我有很多个类似的导航，那么这段代码会重复无数次
+<NavLink activeClassName="chenhs" className="list-group-item" to="/home1">Home1</NavLink>
+<NavLink activeClassName="chenhs" className="list-group-item" to="/home2">Home2</NavLink>
+<NavLink activeClassName="chenhs" className="list-group-item" to="/home3">Home3</NavLink>
+<NavLink activeClassName="chenhs" className="list-group-item" to="/home4">Home4</NavLink>
+<NavLink activeClassName="chenhs" className="list-group-item" to="/home5">Home5</NavLink>
+activeClassName className 这两部分是保持不变的，只有to和提示词在变换，因此可以对其进行一定的封装，使得代码的复用率提高
+<MyNavLink to="/home">Home</MyNavLink>
+之所以叫做封装而不是叫做重构，就是因为要在MyNavLink中引入并使用NavLink，进行部分改造作为自己的NavLink
+传入的多个props属性，可以使用{...this.props}来进行展开赋值
+但 <组件名 标签属性="xyz">标签体</组件名>中标签体需要额外使用props来传递就非常的不合理，如<A {...this.props}>{this.props.title}</A>
+注意到标签体内容也是一个特殊的标签属性，只不过它在props中的key叫做children，因此可以直接使用{this.props.children}来获取
+即 <A {...this.props}>{this.props.children}</A>
+同理标签体也可以不写在两个标签开闭中，可以直接作为props属性的children传入
+<ComponentName 固定属性名1="指定属性值1" 固定属性名2="指定属性值2" ... {...this.props} />
