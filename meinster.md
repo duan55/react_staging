@@ -538,7 +538,7 @@ match中的isExact表示是否完全匹配，如果是false，则匹配的是子
         search: ""
         state: undefined
     match:
-        params: Object {  }
+        params: Object {}
         path: "/about"
         url: "/about"
 }
