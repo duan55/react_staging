@@ -542,3 +542,27 @@ match中的isExact表示是否完全匹配，如果是false，则匹配的是子
         path: "/about"
         url: "/about"
 }
+
+p79 NavLink的使用
+bootstrap在public中已经引入，其作为一个广泛使用的前端开发框架被默认引入
+想要实现默认的高亮效果：
+默认
+<Link className="list-group-item" to="/home">Home</Link>
+点击后，希望其变为高亮状态
+<Link className="list-group-item active" to="/home">Home</Link>
+可以使用NavLink，其默认的作用就是在点击后在样式后拼接一个active
+<NavLink className="list-group-item" to="/home">Home</NavLink>
+当然为了其灵活性，也可以增加其他的属性，比如activeClassName，activeStyle等来保证变换为想要的格式
+<NavLink activeClassName="chenhs" className="list-group-item" to="/home">Home</NavLink>
+
+在/public/index.html中写一个自定义的style
+    <style>
+        .chenhs{
+            /* 加入!important防止因为bootstrap的权重过高让页面渲染出现闪烁的问题 */
+            background-color: rgb(0, 0, 0) !important;
+            color: white !important;
+        }
+    </style>
+那之后css切换正确且流畅
+
+p80
