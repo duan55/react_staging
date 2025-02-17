@@ -693,3 +693,22 @@ p85 嵌套路由的使用
 会发现永远不会匹配到/home/message，因为/home/message已经被重定向
 
 其他步骤同一级路由一样
+
+小结：
+1、注册子路由的时候需要加上父路由的path值
+2、路由的匹配是按照注册路由的顺序进行的，如果有严格匹配的路由，则会影响到后续的匹配
+
+
+p86 向路由组件传递params参数
+如果展示区是当前组件，则导航区是展示区的父组件，即当前组件的父组件
+
+向路由组件传递params参数
+<Link to={`/home/message/detail/${item.id}/${item.title}`}>{item.title}</Link>
+声明接收params参数，被传入到了match对象中params属性里，使用:xxx来接收
+<Route path="/home/message/detail/:id/:title" component={Detail} />
+
+组件中处理得到对应id的属性
+const {targetId,targetTitle} = this.props.match.params
+const findResult = data.find((item)=>{
+     return item.id === targetId
+})
