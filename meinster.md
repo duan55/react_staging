@@ -469,4 +469,76 @@ npm install react-router-dom@5 安装指定版本的库
 }
 
 p78 路由组件与一般组件
+1、明确好界面中的导航区、展示区
+2、导航区的a标签改为Link标签 <Link to="/xxxx">xxxx的提示语</Link>
+3、展示区使用Route标签进行路径的匹配 <Route path="/xxxx" component={Demo}>
+4、<App>的最外侧包裹一个<BrowserRouter>或者<HashRouter>来使得路由通信生效
 
+BrowserRouter 基于HTML5的history API，可以实现前进、后退、刷新操作                                                      /about
+HashRouter 基于hash(#)的url，可以实现无刷新跳转，#号后面的内(被认定为hash值、锚点值，被认定为是前台资源)都不会发送到服务器  /#/about
+
+虽然About与Home都为组件放在了components文件夹下，但是他们都是路由组件，因此需要更改其存放位置到pages文件夹
+路由组件:<Route path="/home" component={Home}/> 依靠路由匹配来展示对应组件
+一般组件:<Home /> 直接使用该组件
+
+而这两者最大的区别是：一般组件的props如果不主动传递值是不会有所接收的
+而路由组件则会接收到路由器所传递的几个重要的props信息:history、location、match等props
+
+路由组件与一般组件的区别总结:
+1、写法不同：
+    一般组件：<Demo/>
+    路由组件；<Route path="/demo" component={Demo}/>
+2、存放位置不同：
+    一般组件：components文件夹下
+    路由组件：pages文件夹下
+3、接收props的不同：
+    一般组件：写组件标签的时候，传递什么props，就能接收到什么props
+    路由组件：接收到路由器传递的三个固定props属性：history、location、match
+
+路由组件的props示例:
+{
+    history:
+        action: "PUSH"
+        block: function block(prompt)​​
+        createHref: function createHref(location)​​
+        go: function go(n)​​
+        goBack: function goBack()​​
+        goForward: function goForward()
+        length: 6
+        listen: function listen(listener)​​
+        location: Object { pathname: "/about", search: "", key: "dojpfn", … }
+        push: function push(path, state)​​
+        replace: function replace(path, state)​​
+    location: 
+        hash: ""
+        key: "dojpfn"
+        pathname: "/about"
+        search: ""
+        state: undefined
+    match:
+        isExact: true
+        params: Object {  }
+        path: "/about"
+        url: "/about"
+    staticContext: undefined
+}
+注意到history.location 和 location 这两个数据是一样的
+location中的key每次刷新都不一样(随机生成的)
+match中的isExact表示是否完全匹配，如果是false，则匹配的是子路由
+再去掉一些平时不关注的属性，那么现在将上述的props化简为：
+{
+    history:
+        go: function go(n)​​
+        goBack: function goBack()​​
+        goForward: function goForward()
+        push: function push(path, state)​​
+        replace: function replace(path, state)​​
+    location: 
+        pathname: "/about"
+        search: ""
+        state: undefined
+    match:
+        params: Object {  }
+        path: "/about"
+        url: "/about"
+}
