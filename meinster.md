@@ -682,3 +682,14 @@ p84 Redirect的使用
     {/*兜底作用，如果过上述都为进行匹配则听由Redirect发配到/home*/}
     <Redirect to="/home"/>
 </Switch>
+
+和java中的try-catch一样，Redirect可以捕获到路由匹配失败的情况，并将控制权转移到指定的路由
+
+嵌套路由
+p85 嵌套路由的使用
+如果在二级路由匹配的前一级路由开启了严格匹配，那么进入/home中有news与message两个路由项，
+选择任一后因为路由会去匹配最先注册的，即/home与/about路由层，
+因为严格匹配后/home/news中不符合这两者，走重定向到/about，
+会发现永远不会匹配到/home/message，因为/home/message已经被重定向
+
+其他步骤同一级路由一样
