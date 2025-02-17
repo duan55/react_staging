@@ -5,8 +5,6 @@ import About from './pages/About'        //About是路由组件
 import Header from './components/Header' //Header是一般组件
 import MyNavLink from './components/MyNavLink'
 
-import Test from './pages/Test'
-
 export default class App extends Component {
 
   render() {
@@ -24,8 +22,8 @@ export default class App extends Component {
               {/* <a className="list-group-item active" href="./about.html">About</a>
               <a className="list-group-item" href="./home.html">Home</a> */}
               {/* 1、编写路由链接 在react中靠路由链接实现切换组件；注意Link需要被Router管理,但是如果多个地方都写了Router，其路由之间不能通信，所以可以直接将Router写在App组件外侧包裹所有，即直接在index.js中写Router*/}
-              <MyNavLink to="/about" children="About"/>
-              <MyNavLink to="/home"> Home </MyNavLink>
+              <MyNavLink to="/duan55/about" children="About"/>
+              <MyNavLink to="/duan55/home"> Home </MyNavLink>
             </div>
           </div>
           <div className="col-xs-6">
@@ -33,10 +31,8 @@ export default class App extends Component {
               <div className="panel-body">
                 {/* 2、注册路由 */}
                 <Switch>
-                  <Route path="/about" component={About} />
-                  <Route path="/home" component={Home} />
-                  {/* 该test组件永不触发，因为home会在上面被匹配，导致直接跳出遍历*/} 
-                  <Route path="/home" component={Test} />
+                  <Route path="/duan55/about" component={About} />
+                  <Route path="/duan55/home" component={Home} />
                 </Switch>
               </div>
             </div>

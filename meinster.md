@@ -609,3 +609,37 @@ p81 Switch的使用
 2、单一匹配原则:Switch可以提高路由匹配的效率，只要匹配到第一个就不再继续匹配
 
 p82 解决样式丢失问题
+将路径从/home改为/duan55/home后，刷新页面，样式丢失 详见附件./assets/05_bootstrap样式丢失了吗.png
+
+解析：
+注意到其访问的路径为http://localhost:3000/duan55/css/bootstrap.css
+localhost:3000是脚手架内置的服务器，通过webpack-dev-server启动的，即localhost:3000就是脚手架
+而react脚手架中通过webpack中的配置，将public文件夹作为localhost:3000这台内置服务器的根路径
+如果请求了一个不存在的资源，则会返回/public/index.html
+
+之前没有变换访问路径的时候访问的是http://localhost:3000/css/bootstrap.css
+变换之后访问的路径是http://localhost:3000/duan55/css/bootstrap.css
+相当于去访问/public/duan55/css/bootstrap.css，而这个路径不存在，因此返回的是默认的index.html
+
+所以其样式丢失的真实原因在请求bootstrap.css的时候返回了没有找到该路径资源时的默认返回兜底返回值的index.html
+
+原因：
+路由变为多级结构时，刷新页面导致css文件寻址错误，进而导致样式丢失
+
+解决办法：
+1、将/public/index.html中的样式引入方式从相对路径修改为绝对路径
+<link rel="stylesheet" href="./css/bootstrap.css"> --> <link rel="stylesheet" href="/css/bootstrap.css">
+这样在寻址错误默认返回index.html时，
+样式从localhost:3000/duan55/css/bootstrap.css中加载变为每次都加载绝对路径的的localhost:3000/public/css/bootstrap.css
+
+2、<link rel="stylesheet" href="./css/bootstrap.css"> --> <link rel="stylesheet" href="%PUBLIC_URL%/css/bootstrap.css">
+%PUBLIC_URL%表示public文件夹的绝对路径，与第一种方法类似，也是将路径引导至正确的css文件位置
+
+3、将BrowserRouter改为HashRouter
+路径中增加了#，其后面的路径都被认定为前端资源，压根不会发往后端，即避免了路径寻址错误的问题
+即localhost:3000#/duan55/home 向后端请求css的时候 #后面的内容被忽略 会请求localhost:3000/css/bootstrap.css 而不是/duan55/css/bootstrap.css
+
+冷知识：
+304表示访问缓存，使用强制刷新可以忽略缓存，重新请求资源，此时如果成功应该返回200
+
+目前比较推荐第一种，因为美团也没有使用第三种方式，HashRouter的使用场景比较少
