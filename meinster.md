@@ -717,4 +717,36 @@ const findResult = data.find((item)=>{
 1、路由链接（携带参数）：<Link to='/path1/path2/params1/params2'>详情</Link>
 可以使用模板字符串进行传参：<Link to={`/home/message/detail/${item.id}/${item.title}`}>{item.title}</Link>
 2、注册路由（声明接收）：<Route path='/path1/path2/:params1/:params2' component={Receiver}/>
-3、接收参数： const {params1,params2} = this.props.match.params
+3、接收参数：const {params1,params2} = this.props.match.params
+
+
+p87 向路由组件传递search参数 （传递的时候比params简单，但是接收更加麻烦）
+传入search参数只需要在路由链接中使用?a=1&b=2的形式即可，注册路由正常声明即可，但是，
+接收search参数被传入到了location对象中的search属性中（但是其形式非常抽象: '?id=1&title=cry1'）
+使用react脚手架自动安装的库 -> import qs from'qs' ((旧版本)import qs from 'query-string')
+
+冷知识：urlencoded编码方式
+let obj = { a: 1, b: 2 } -> a=1&b=2 
+对象转化为key=value&key=value的形式，叫做urlencoded编码方式 
+
+
+let obj = { song: 'chunriying', band: 'mygo' }
+console.log(qs.stringify(obj)) // "song=春日影&band=mygo"
+console.log(qs.parse(qs.stringify(obj))) //Object { song: "chunriying", band: "mygo" }
+使用方式 
+qs.stringify(obj) 将对象转化为urlencoded编码的字符串 
+qs.parse(str) 将urlencoded编码的字符串转化为对象 
+
+const {search} = this.props.location
+const {id, title} = qs.parse(search.slice(1)) //去掉?号,然后使用qs.parse转化为对象
+
+小结：
+1、路由链接（携带参数）：<Link to='/path1/path2?params=2233&params=abcd'>详情</Link>
+2、注册路由（无需额外声明接收）：<Route path='/path1/path2' component={Receiver}/>
+3、接收参数：
+①const {search} = this.props.location //接收search参数，其形式为'?params=2233&params=abcd'
+②因为search是urlencoded编码字符串，需要借助querystring解析，qs.parse(search.slice(1)) //去掉?号,然后使用qs.parse转化为对象
+
+
+p88 向路由组件传递state参数  （注意该state并非react中组件的state属性，而是路由组件上的独有属性）
+state参数
