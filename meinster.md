@@ -797,3 +797,6 @@ replace 替换
 在Link中将replace设置为true，跳转则会替换掉当前的路由，而不是在栈中添加新的路由
 <Link replace={true} to={{pathname: '/home/message/detail', state:{id:item.id,title:item.title}}}>{item.title}</Link>
 注意到只有加上了replace的路由才会满足直接替换当前路由的条件，否则还是会在栈中添加新的路由，测试的时候要注意
+
+
+p91 编程式路由导航
