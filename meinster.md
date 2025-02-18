@@ -760,4 +760,30 @@ p88 向路由组件传递state参数  （注意该state并非react中组件的st
 3、接收参数：const {params,params2} = this.props.location.state //接收state参数，其形式为{params:2233,params2:'abcd'}
 ps：刷新后，因为BrowserRouter一直在操作history对象，调用它的api，因此state参数在刷新页面的情况下，都不会影响页面的显示
 
+p89 路由参数的总结
 
+params参数：
+1、路由链接（携带参数）：<Link to='/path1/path2/params1/params2'>详情</Link>  模板字符串方式
+可以使用模板字符串进行传参：<Link to={`/home/message/detail/${item.id}/${item.title}`}>{item.title}</Link>
+2、注册路由（声明接收）：<Route path='/path1/path2/:params1/:params2' component={Receiver}/>
+3、接收参数：const {params1,params2} = this.props.match.params
+
+search参数：
+1、路由链接（携带参数）：<Link to='/path1/path2?params=2233&params2=abcd'>详情</Link>  模板字符串方式
+2、注册路由（无需额外声明接收）：<Route path='/path1/path2' component={Receiver}/>
+3、接收参数：
+①const {search} = this.props.location //接收search参数，其形式为'?params=2233&params2=abcd'
+②因为search是urlencoded编码字符串，需要借助querystring解析，qs.parse(search.slice(1)) //去掉?号,然后使用qs.parse转化为对象
+
+state参数：
+1、路由链接（携带参数）：<Link to={{pathname:'/path1/path2',state:{params:2233,params2:'abcd'}}}>详情</Link>
+2、注册路由（无需额外声明接收）：<Route path='/path1/path2' component={Receiver}/>
+3、接收参数：const {params,params2} = this.props.location.state //接收state参数，其形式为{params:2233,params2:'abcd'}
+ps：刷新后，因为BrowserRouter一直在操作history对象，调用它的api，因此state参数在刷新页面的情况下，都不会影响页面的显示
+
+params比较泛用 频率最高；其次是search(解析起来麻烦)；state在不想要用户知道传递了什么参数或者参数的场合使用
+
+注意到params传递path的场合也可以使用对象的形式(像state一样)，但是没有必要，基本上只有在传递state参数的场合才使用对象形式
+例子：
+<Link to={`/home/message/detail/${item.id}/${item.title}`}>{item.title}</Link>
+<Link to={{pathname:`/home/message/detail/${item.id}/${item.title}`}}>{item.title}</Link>
