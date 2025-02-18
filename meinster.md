@@ -712,3 +712,9 @@ const {targetId,targetTitle} = this.props.match.params
 const findResult = data.find((item)=>{
      return item.id === targetId
 })
+
+小结：
+1、路由链接（携带参数）：<Link to='/path1/path2/params1/params2'>详情</Link>
+可以使用模板字符串进行传参：<Link to={`/home/message/detail/${item.id}/${item.title}`}>{item.title}</Link>
+2、注册路由（声明接收）：<Route path='/path1/path2/:params1/:params2' component={Receiver}/>
+3、接收参数： const {params1,params2} = this.props.match.params
