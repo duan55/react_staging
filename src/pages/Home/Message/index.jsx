@@ -15,7 +15,7 @@ export default class Message extends Component {
         const { messageArr } = this.state
         return (
             <div>
-                <h4>为什么要演奏春日影</h4>
+                <h4>It's MyGo!!!!!</h4>
                 <ul>
                     {
                         messageArr.map(item => {

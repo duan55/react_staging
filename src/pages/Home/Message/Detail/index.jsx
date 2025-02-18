@@ -11,15 +11,15 @@ export default class Detail extends Component {
   render() {
     console.log(this.props)
     //接收到的params参数被传入到了match对象中params属性中
-    const {targetId,targetTitle} = this.props.match.params
+    const {id,title} = this.props.match.params
     const findResult = data.find((item)=>{
-        return item.id === targetId
+        return item.id === id
     })
     return (
       <div>
         <ul>
-            <li>id:{targetId}</li>
-            <li>title:{targetTitle}</li>
+            <li>id:{id}</li>
+            <li>title:{title}</li>
             <li>content:{findResult.content}</li>
         </ul>
       </div>
