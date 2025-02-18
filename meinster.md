@@ -787,3 +787,13 @@ params比较泛用 频率最高；其次是search(解析起来麻烦)；state在
 例子：
 <Link to={`/home/message/detail/${item.id}/${item.title}`}>{item.title}</Link>
 <Link to={{pathname:`/home/message/detail/${item.id}/${item.title}`}}>{item.title}</Link>
+
+路由跳转的两种方式
+p90 push与replace（默认为push）
+
+push 栈
+
+replace 替换 
+在Link中将replace设置为true，跳转则会替换掉当前的路由，而不是在栈中添加新的路由
+<Link replace={true} to={{pathname: '/home/message/detail', state:{id:item.id,title:item.title}}}>{item.title}</Link>
+注意到只有加上了replace的路由才会满足直接替换当前路由的条件，否则还是会在栈中添加新的路由，测试的时候要注意
