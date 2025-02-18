@@ -714,7 +714,7 @@ const findResult = data.find((item)=>{
 })
 
 小结：
-1、路由链接（携带参数）：<Link to='/path1/path2/params1/params2'>详情</Link>
+1、路由链接（携带参数）：<Link to='/path1/path2/params1/params2'>详情</Link>  模板字符串方式
 可以使用模板字符串进行传参：<Link to={`/home/message/detail/${item.id}/${item.title}`}>{item.title}</Link>
 2、注册路由（声明接收）：<Route path='/path1/path2/:params1/:params2' component={Receiver}/>
 3、接收参数：const {params1,params2} = this.props.match.params
@@ -741,12 +741,23 @@ const {search} = this.props.location
 const {id, title} = qs.parse(search.slice(1)) //去掉?号,然后使用qs.parse转化为对象
 
 小结：
-1、路由链接（携带参数）：<Link to='/path1/path2?params=2233&params=abcd'>详情</Link>
+1、路由链接（携带参数）：<Link to='/path1/path2?params=2233&params2=abcd'>详情</Link>  模板字符串方式
 2、注册路由（无需额外声明接收）：<Route path='/path1/path2' component={Receiver}/>
 3、接收参数：
-①const {search} = this.props.location //接收search参数，其形式为'?params=2233&params=abcd'
+①const {search} = this.props.location //接收search参数，其形式为'?params=2233&params2=abcd'
 ②因为search是urlencoded编码字符串，需要借助querystring解析，qs.parse(search.slice(1)) //去掉?号,然后使用qs.parse转化为对象
 
 
 p88 向路由组件传递state参数  （注意该state并非react中组件的state属性，而是路由组件上的独有属性）
-state参数
+前两种传递参数的方式都会在浏览器地址栏中显示传递的参数信息，而state参数会在浏览器地址栏中隐藏所传递的参数
+
+在使用BrowerRouter的情况下，BrowserRouter一直在操作history对象，调用它的api，因此三种参数传递在刷新页面的情况下，都不会影响页面的显示
+(前两中url地址有参数记录保留，state有history对象留存记录<history中有location，location中有state>)
+
+小结：
+1、路由链接（携带参数）：<Link to={{pathname:'/path1/path2',state:{params:2233,params2:'abcd'}}}>详情</Link>
+2、注册路由（无需额外声明接收）：<Route path='/path1/path2' component={Receiver}/>
+3、接收参数：const {params,params2} = this.props.location.state //接收state参数，其形式为{params:2233,params2:'abcd'}
+ps：刷新后，因为BrowserRouter一直在操作history对象，调用它的api，因此state参数在刷新页面的情况下，都不会影响页面的显示
+
+
