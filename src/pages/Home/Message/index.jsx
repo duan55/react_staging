@@ -11,6 +11,33 @@ export default class Message extends Component {
         ]
     }
 
+    //点击按钮切换到指定页面，并不留下历史记录(Link NavLink在代码里写不了一点，因为他们需要被点击才能够触发，现在需要直接通过代码实现跳转)
+    replaceCheckInfo = (id,title) => {
+        //使用history的API，replace方法可以替换当前历史记录，不会留下历史记录
+        //(1)replace跳转+携带params参数
+        // this.props.history.replace(`/home/message/detail/${id}/${title}`)
+
+        //(2)replace跳转+携带query参数/search参数
+        // this.props.history.replace(`/home/message/detail?id=${id}&title=${title}`)
+
+        //(3)replace跳转+携带state参数
+        this.props.history.replace({pathname: `/home/message/detail`,state: { id: id, title: title }})
+        
+    }
+
+    //留痕压栈跳转
+    pushCheckInfo = (id,title) => {
+        //使用history的API，push方法可以添加新的历史记录，不会替换当前历史记录
+        //(1)push跳转+携带params参数
+        // this.props.history.push(`/home/message/detail/${id}/${title}`)
+
+        //(2)push跳转+携带query参数/search参数
+        // this.props.history.push(`/home/message/detail?id=${id}&title=${title}`)
+
+        //(3)push跳转+携带state参数
+        this.props.history.push({pathname: `/home/message/detail`,state: { id: id, title: title }})
+    }
+
     render() {
         const { messageArr } = this.state
         return (
@@ -30,16 +57,20 @@ export default class Message extends Component {
                                     {/* （3）向路由组件传递state参数 之前的to后面都接的字符串，现在需要传入对象{{}}，外层{}为js表达式，内层为对象*/}
                                     <Link to={{pathname: '/home/message/detail', state:{id:item.id,title:item.title}}}>{item.title}</Link>
 
+                                    &nbsp;&nbsp;
+                                    <button onClick={()=>this.pushCheckInfo(item.id,item.title)}>push查看</button>
+                                    &nbsp;
+                                    <button onClick={()=>this.replaceCheckInfo(item.id,item.title)}>replace查看</button>
                                 </li>
                             )
                         })
                     }
                 </ul>
                 {/* （1）声明接收params参数，被传入到了match对象中params属性里 */}
-                {/* <Route path="/home/message/detail/:id/:title" component={Detail} />*/}
+                {/* <Route path="/home/message/detail/:id/:title" component={Detail} /> */}
 
                 {/* （2）search参数无需声明接收，正常注册路由即可 --- 因为search参数在声明中增加了？，参数会被自动识别，路由中无需更多额外动作*/}
-                {/* <Route path="/home/message/detail" component={Detail}/>*/}
+                {/* <Route path="/home/message/detail" component={Detail}/> */}
 
                 {/* （3）state参数无需声明接收，正常注册路由即可*/}
                 <Route path="/home/message/detail" component={Detail}/>

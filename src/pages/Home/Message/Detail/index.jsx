@@ -17,7 +17,7 @@ export default class Detail extends Component {
     //（2）接收search参数被传入到了location对象中的search属性中（但是其形式非常抽象: '?id=1&title=cry1'）
     // const {search} = this.props.location
     // const {id, title} = qs.parse(search.slice(1)) // 去掉?号
-    // 使用 slice(1) 这个方法来去掉查询字符串开头的问号（?）。因此，如果 search 是 ?id=1&title=cry1，那么 search.slice(1) 会返回 id=1&title=cry1 这样做是为了准备解析成对象
+    // 备注：使用 slice(1) 这个方法来去掉查询字符串开头的问号（?）。因此，如果 search 是 ?id=1&title=cry1，那么 search.slice(1) 会返回 id=1&title=cry1 这样做是为了准备解析成对象
     // const {id, title} = qs.parse(search, {ignoreQueryPrefix: true})
 
     //（3）接收state参数 防止用户清空浏览器记录导致数据全丢失的情况下，需要熔断处理使用{}作为默认值
