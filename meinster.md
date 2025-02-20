@@ -943,8 +943,22 @@ import { WechatOutlined } from '@ant-design/icons';
 
 <WechatOutlined /> 即可显示微信图标
 
-
 那么来看看自己实现起来比较复杂的，比如：日期选择框
+
+import {DatePicker} from 'antd';
+const {RangePicker} = DatePicker;
+
+onChange = (date, dateString) => {
+console.log(date, dateString);
+};
+
+<DatePicker onChange={this.onChange} />
+<RangePicker/>
+
+
+p95 antd样式的按需引入
+
+
 
 
 
