@@ -908,3 +908,28 @@ p93 BrowserRouter与HashRouter的区别
   HashRouter刷新后会导致路由丢失state参数，因此刷新后页面会回到初始状态!!!!!
 4、备注：HashRouter可以用于解决一些路径错误相关的问题
 5、一般情况下B用的多，H只是考虑极端兼容性下使用吧~
+
+
+六、React UI组件库
+流行的开源React UI组件库有很多，比如：
+1、Ant Design：https://ant.design/index-cn
+2、Material UI：https://www.material-ui.com/#/
+
+这里以ant-design(国内蚂蚁金服)作为例子学习
+p94 antd的基本使用
+先下载 
+npm i antd
+
+
+
+
+
+
+
+
+
+
+
+
+
+七、redux
