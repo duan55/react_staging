@@ -957,9 +957,17 @@ console.log(date, dateString);
 
 
 p95 antd样式的按需引入
+5.0以前的样式引入是 import 'antd/dist/antd.css'
+现在5.0之后，只需要import {xx组件} from 'antd-xx'即可，已经不需要再额外进行样式的引入了
+学习4.x的版本最好去看3.x的教程结合起来，因此需要在版本处选择3.x的'文档'即可
+以前的步骤
+1、修改react脚手架的配置 安装react-app-rewired customize-cra
+2、修改package.json的scripts命令，添加"start": "react-app-rewired start"等信息
+3、在根目录创建config-overrides.js，修改默认配置(因为webpack一类的配置文件是隐藏的，需要中介去修改)
+解释：使用customize-cra修改了webpack的配置的场合，就不可以使用原来的脚手架中package.json的默认启、测、构建命令了，需要使用react-app-rewired替代
+4、使用babel-plugin-import，它是一个按需加载组件代码和样式的babel插件，安装并修改config-overrides.js文件
 
-
-
+但是这已经是很老旧的操作了，现在新时代不需要这么麻烦了，仅做一个了解吧
 
 
 
