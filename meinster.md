@@ -914,11 +914,39 @@ p93 BrowserRouter与HashRouter的区别
 流行的开源React UI组件库有很多，比如：
 1、Ant Design：https://ant.design/index-cn
 2、Material UI：https://www.material-ui.com/#/
+其他ui库推荐：
+element-ui （饿了么出品的主vue的，支持了react的ui库）
+vantUI 针对移动端的ui库
 
 这里以ant-design(国内蚂蚁金服)作为例子学习
 p94 antd的基本使用
 先下载 
 npm i antd
+
+进入到'按钮'界面(https://ant.design/components/button-cn#button-demo-chinese-space)
+每个代码演示中有样式以及下方的五个选项，前四个都是在线编程相关，第五个为查看代码(详见/assets/6_antd页面显示代码.png)
+
+老版本的antd还需要手动引入样式，现在新版本已经不需要了(import 'antd/dist/antd.css')
+
+查看了官方的演示之后，如果还想要看进一步的内容，在官网的右侧底部有API选项，可以查看各个属性的作用进行微调
+
+ps:官方演示里面有Flex组件，但是不加好像也能用不知道什么作用
+
+那之后使用一下icon中
+
+antd有很多子库，比如图标就在@ant-design/icons中，需要额外从该库中引入图标
+
+点击对应的图标就会直接复制到剪切板，比如微信图标：<WechatOutlined />
+
+完整代码格式：
+import { WechatOutlined } from '@ant-design/icons';
+
+<WechatOutlined /> 即可显示微信图标
+
+
+那么来看看自己实现起来比较复杂的，比如：日期选择框
+
+
 
 
 
