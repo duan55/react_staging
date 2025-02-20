@@ -868,3 +868,8 @@ pushCheckInfo = (id,title) => {
 
 go与back&forward的区别：
 好像没什么区别，灵活性与预制菜的区别
+
+案例：在点击news组件的2s后，自动跳转到message组件 (有点类似于一个网站用户注册完毕之后，自动跳转到首页的操作)
+因为组件一旦挂载就会调用componentDidMount，因此可以在news组件中改动
+
+p92 withRouter的使用
