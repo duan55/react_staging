@@ -982,6 +982,15 @@ p96 antd的自定义主题
 
 七、redux
 p97 redux简介
+1.文档：
+英文文档:https://redux.js.org/
+中文文档:https://www.redux.org.cn/
+Github：https://github.com/reactjs/redux/
+
+2.redux是什么
+2.1 redux是一个专门用于做状态管理的JS库(不是React插件库)
+
+
 
 
 
