@@ -808,3 +808,63 @@ p91 编程式路由导航
 
 不借助路由链接的情况下，实现路由跳转
 
+那便是编程式路由导航，方法就是操作historyAPI：
+{
+    history:
+        go: function go(n)​​   //前进或后退n步
+        goBack: function goBack()​  ​ //后退1步
+        goForward: function goForward()   //前进1步
+        push: function push(path, state)​​   //push跳转
+        replace: function replace(path, state)​​   //replace跳转
+    location: 
+        pathname: "/about"
+        search: ""
+        state: undefined
+    match:
+        params: Object {}
+        path: "/about"
+        url: "/about"
+}
+接收两种参数path与state
+<button onClick={()=>this.pushCheckInfo(item.id,item.title)}>push查看</button>
+<button onClick={()=>this.replaceCheckInfo(item.id,item.title)}>replace查看</button>
+
+//点击按钮切换到指定页面，并不留下历史记录(Link NavLink在代码里写不了一点，因为他们需要被点击才能够触发，现在需要直接通过代码实现跳转)
+replaceCheckInfo = (id,title) => {
+    //使用history的API，replace方法可以替换当前历史记录，不会留下历史记录
+    //(1)replace跳转+携带params参数
+    // this.props.history.replace(`/home/message/detail/${id}/${title}`)
+
+    //(2)replace跳转+携带query参数/search参数
+    // this.props.history.replace(`/home/message/detail?id=${id}&title=${title}`)
+
+    //(3)replace跳转+携带state参数
+    this.props.history.replace({pathname:`/home/message/detail`,state:{id,title}})//像{id:id,title:title}左值与形参一模一样的场合可以略写
+    //this.props.history.replace(`/home/message/detail`,{id,title})
+}
+
+//留痕压栈跳转
+pushCheckInfo = (id,title) => {
+    //使用history的API，push方法可以添加新的历史记录，不会替换当前历史记录
+    //(1)push跳转+携带params参数
+    // this.props.history.push(`/home/message/detail/${id}/${title}`)
+
+    //(2)push跳转+携带query参数/search参数
+    // this.props.history.push(`/home/message/detail?id=${id}&title=${title}`)
+
+    //(3)push跳转+携带state参数
+    this.props.history.push({pathname:`/home/message/detail`,state:{id,title}})
+    //this.props.history.push(`/home/message/detail`,{id,title})
+}
+
+注意到params与search参数都需要效仿link在path传参就行，而state参数需要将路径和参数都传进去
+
+前进与后退：
+<button onClick={()=>this.props.history.goBack()}>返回</button>
+<button onClick={()=>this.props.history.goForward()}>前进</button>
+
+前进&后退复合
+<button onClick={()=>this.props.history.go(-2)}>前进或后退n步(此处为-2,后退两步)</button>
+
+go与back&forward的区别：
+好像没什么区别，灵活性与预制菜的区别

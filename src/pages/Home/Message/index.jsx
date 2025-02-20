@@ -21,8 +21,8 @@ export default class Message extends Component {
         // this.props.history.replace(`/home/message/detail?id=${id}&title=${title}`)
 
         //(3)replace跳转+携带state参数
-        this.props.history.replace({pathname: `/home/message/detail`,state: { id: id, title: title }})
-        
+        // this.props.history.replace({pathname:`/home/message/detail`,state:{id,title}})//像{id:id,title:title}左值与形参一模一样的场合可以略写
+        this.props.history.replace(`/home/message/detail`,{id,title})
     }
 
     //留痕压栈跳转
@@ -35,7 +35,8 @@ export default class Message extends Component {
         // this.props.history.push(`/home/message/detail?id=${id}&title=${title}`)
 
         //(3)push跳转+携带state参数
-        this.props.history.push({pathname: `/home/message/detail`,state: { id: id, title: title }})
+        // this.props.history.push({pathname:`/home/message/detail`,state:{id,title}})
+        this.props.history.push(`/home/message/detail`,{id,title})
     }
 
     render() {
@@ -74,6 +75,13 @@ export default class Message extends Component {
 
                 {/* （3）state参数无需声明接收，正常注册路由即可*/}
                 <Route path="/home/message/detail" component={Detail}/>
+
+                <button onClick={()=>this.props.history.goBack()}>返回</button>
+                <button onClick={()=>this.props.history.goForward()}>前进</button>
+
+                <button onClick={()=>this.props.history.go(-2)}>前进或后退n步(此处为-2,后退两步)</button>
+
+
             </div>
         )
     }
