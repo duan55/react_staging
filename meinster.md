@@ -873,3 +873,24 @@ go与back&forward的区别：
 因为组件一旦挂载就会调用componentDidMount，因此可以在news组件中改动
 
 p92 withRouter的使用
+上一节中的回退与前进按钮被放置在了路由组件Messge中，这很好理解，但是如果我想把它放在其他一般组件中呢？有什么难点？
+答案是上一节的回调函数都无一例外地依赖着this.props.history，但是一般组件是被直接声明调用的，一般情况下没有props属性(指的是没有人传history)
+因此需要借助一点新手段来使得一般组件也能使用路由组件身上的API
+
+
+
+export default class Header extends Component {}
+
+->
+
+import { withRouter } from 'react-router-dom' //引入withRouter函数(并非组件，因此其名称为小写)
+class Header extends Component {}
+export default withRouter(Header)  //暴露被withRouter函数包装过的Header组件(有了history属性)
+
+通过console.log("Header接受到的props为: ",this.props)可以发现Header组件也确实收到了history相关的属性，像一个路由组件一样了
+
+总结：
+witchRouter可以加工一般组件，使得其具备路由组件特有的API；其返回值是一个新组件
+
+ps:
+发现之前的MyNavLink组件点击跳转现在第一次是push之后是replace，直接在其中声明了replace属性，但是第二次点击还是push，不知道为什么

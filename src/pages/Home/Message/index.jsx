@@ -56,7 +56,7 @@ export default class Message extends Component {
                                     {/* <Link to={`/home/message/detail/?id=${item.id}&title=${item.title}`}>{item.title}</Link> */}
 
                                     {/* （3）向路由组件传递state参数 之前的to后面都接的字符串，现在需要传入对象{{}}，外层{}为js表达式，内层为对象*/}
-                                    <Link to={{pathname: '/home/message/detail', state:{id:item.id,title:item.title}}}>{item.title}</Link>
+                                    <Link replace to={{pathname: '/home/message/detail', state:{id:item.id,title:item.title}}}>{item.title}</Link>
 
                                     &nbsp;&nbsp;
                                     <button onClick={()=>this.pushCheckInfo(item.id,item.title)}>push查看</button>
