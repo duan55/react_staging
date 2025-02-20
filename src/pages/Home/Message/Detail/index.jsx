@@ -12,7 +12,7 @@ export default class Detail extends Component {
   render() {
     console.log("Detail组件接受到的props为: ", this.props)
     //（1）接收到的params参数被传入到了match对象中的params属性中
-    // const {id,title} = this.props.match.params 
+    const {id,title} = this.props.match.params 
 
     //（2）接收search参数被传入到了location对象中的search属性中（但是其形式非常抽象: '?id=1&title=cry1'）
     // const {search} = this.props.location
@@ -21,7 +21,7 @@ export default class Detail extends Component {
     // const {id, title} = qs.parse(search, {ignoreQueryPrefix: true})
 
     //（3）接收state参数 防止用户清空浏览器记录导致数据全丢失的情况下，需要熔断处理使用{}作为默认值
-    const {id,title} = this.props.location.state || {}
+    // const {id,title} = this.props.location.state || {}
 
     const findResult = data.find((item) => {
       return item.id === id

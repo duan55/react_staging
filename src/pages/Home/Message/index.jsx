@@ -15,10 +15,10 @@ export default class Message extends Component {
     replaceCheckInfo = (id,title) => {
         //使用history的API，replace方法可以替换当前历史记录，不会留下历史记录
         //(1)replace跳转+携带params参数
-        // this.props.history.replace(`/home/message/detail/${id}/${title}`)
+        this.props.history.replace(`/home/message/detail/${id}/${title}`)
 
         //(2)replace跳转+携带query参数/search参数
-        this.props.history.replace(`/home/message/detail?id=${id}&title=${title}`)
+        // this.props.history.replace(`/home/message/detail?id=${id}&title=${title}`)
 
         //(3)replace跳转+携带state参数
         // this.props.history.replace({pathname:`/home/message/detail`,state:{id,title}})//像{id:id,title:title}左值与形参一模一样的场合可以略写
@@ -29,13 +29,13 @@ export default class Message extends Component {
     pushCheckInfo = (id,title) => {
         //使用history的API，push方法可以添加新的历史记录，不会替换当前历史记录
         //(1)push跳转+携带params参数
-        // this.props.history.push(`/home/message/detail/${id}/${title}`)
+        this.props.history.push(`/home/message/detail/${id}/${title}`)
 
         //(2)push跳转+携带query参数/search参数
         // this.props.history.push(`/home/message/detail?id=${id}&title=${title}`)
 
         //(3)push跳转+携带state参数
-        this.props.history.push({pathname:`/home/message/detail`,state:{id,title}})
+        // this.props.history.push({pathname:`/home/message/detail`,state:{id,title}})
         // this.props.history.push(`/home/message/detail`,{id,title})
     }
 
@@ -50,13 +50,13 @@ export default class Message extends Component {
                             return (
                                 <li key={item.id}>
                                     {/* （1）向路由组件传递params参数 */}
-                                    {/* <Link to={`/home/message/detail/${item.id}/${item.title}`}>{item.title}</Link> */}
+                                    <Link to={`/home/message/detail/${item.id}/${item.title}`}>{item.title}</Link>
 
                                     {/* （2）向路由组件传递search参数 ~ ajax的query参数*/}
                                     {/* <Link to={`/home/message/detail/?id=${item.id}&title=${item.title}`}>{item.title}</Link> */}
 
                                     {/* （3）向路由组件传递state参数 之前的to后面都接的字符串，现在需要传入对象{{}}，外层{}为js表达式，内层为对象*/}
-                                    <Link to={{pathname: '/home/message/detail', state:{id:item.id,title:item.title}}}>{item.title}</Link>
+                                    {/* <Link replace={false} to={{pathname: '/home/message/detail', state:{id:item.id,title:item.title}}}>{item.title}</Link> */}
 
                                     &nbsp;&nbsp;
                                     <button onClick={()=>this.pushCheckInfo(item.id,item.title)}>push查看</button>
@@ -68,13 +68,13 @@ export default class Message extends Component {
                     }
                 </ul>
                 {/* （1）声明接收params参数，被传入到了match对象中params属性里 */}
-                {/* <Route path="/home/message/detail/:id/:title" component={Detail} /> */}
+                <Route path="/home/message/detail/:id/:title" component={Detail} />
 
                 {/* （2）search参数无需声明接收，正常注册路由即可 --- 因为search参数在声明中增加了？，参数会被自动识别，路由中无需更多额外动作*/}
                 {/* <Route path="/home/message/detail" component={Detail}/> */}
 
                 {/* （3）state参数无需声明接收，正常注册路由即可*/}
-                <Route path="/home/message/detail" component={Detail}/>
+                {/* <Route path="/home/message/detail" component={Detail}/> */}
 
                 <button onClick={()=>this.props.history.goBack()}>返回</button>
                 <button onClick={()=>this.props.history.goForward()}>前进</button>
