@@ -18,11 +18,11 @@ export default class Message extends Component {
         // this.props.history.replace(`/home/message/detail/${id}/${title}`)
 
         //(2)replace跳转+携带query参数/search参数
-        // this.props.history.replace(`/home/message/detail?id=${id}&title=${title}`)
+        this.props.history.replace(`/home/message/detail?id=${id}&title=${title}`)
 
         //(3)replace跳转+携带state参数
         // this.props.history.replace({pathname:`/home/message/detail`,state:{id,title}})//像{id:id,title:title}左值与形参一模一样的场合可以略写
-        this.props.history.replace(`/home/message/detail`,{id,title})
+        // this.props.history.replace(`/home/message/detail`,{id,title})
     }
 
     //留痕压栈跳转
@@ -35,8 +35,8 @@ export default class Message extends Component {
         // this.props.history.push(`/home/message/detail?id=${id}&title=${title}`)
 
         //(3)push跳转+携带state参数
-        // this.props.history.push({pathname:`/home/message/detail`,state:{id,title}})
-        this.props.history.push(`/home/message/detail`,{id,title})
+        this.props.history.push({pathname:`/home/message/detail`,state:{id,title}})
+        // this.props.history.push(`/home/message/detail`,{id,title})
     }
 
     render() {

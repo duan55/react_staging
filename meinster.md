@@ -894,5 +894,4 @@ witchRouter可以加工一般组件，使得其具备路由组件特有的API；
 
 ps:
 发现之前的MyNavLink组件点击跳转现在第一次是push之后是replace，直接在其中声明了replace属性，但是第二次点击还是push，不知道为什么
-测试了一下，好像在安装了    npm install --save-dev @babel/plugin-proposal-private-property-in-object 之后
-第一次push 那之后replace 不知道怎么了 
+测试了一下 ：第一次push 那之后replace的原因好像是：params、search都是push，state是这样的
