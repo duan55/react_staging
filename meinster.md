@@ -967,7 +967,10 @@ p95 antd样式的按需引入
 解释：使用customize-cra修改了webpack的配置的场合，就不可以使用原来的脚手架中package.json的默认启、测、构建命令了，需要使用react-app-rewired替代
 4、使用babel-plugin-import，它是一个按需加载组件代码和样式的babel插件，安装并修改config-overrides.js文件
 
-但是这已经是很老旧的操作了，现在新时代不需要这么麻烦了，仅做一个了解吧
+但是这已经是很老旧的操作了，现在新时代不需要这么麻烦了，而且一个项目就改一次，现学现用即可，仅做一个了解吧
+
+p96
+
 
 
 
