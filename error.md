@@ -10,3 +10,49 @@ p95
 antd按需加载样式和代码的原理是什么?
 什么是 antd 的 JS 代码默认支持基于 ES modules 的 tree shaking？
 shift+alt
+
+p96
+在自定义主题中，修改全局的样式；在5.x版本中已经弃用了less，改用了css-in-js；现在好像要使用ConfigProvider来进行主题定制了，具体方法可以参考官方文档(搜其他B站教程)
+https://ant.design/docs/react/migrate-less-variables-cn
+
+写了一个DiyColor.jsx函数式组件
+另外使用了：
+ <ConfigProvider>包裹住需要修改主题颜色的组件并在其标签属性声明对应的更改即可，eg:
+
+ render() {
+    return (
+
+      <ConfigProvider
+        theme={{
+          components: {
+            Button: {
+              primaryColor: 'pink', // 字体色
+              colorPrimary: 'green', // 按钮内背景色
+              defaultColor: 'red', // ...
+            },
+          },
+        }}
+      >
+
+        <div>
+          <h2>ant-design</h2>
+          <Button type="primary">我是一个按钮</Button>
+          <Button>默认按钮</Button>
+          <Button type="dashed">虚线按钮</Button>
+          <Button type="text">文本按钮</Button>
+          <Button type="link">链接按钮</Button>
+          <Button type="primary" icon={<SearchOutlined />}>带搜索框图标的按钮</Button>
+          <br />
+          <WechatOutlined />
+          <WeiboOutlined />
+          <TwitterOutlined />
+          <YoutubeOutlined />
+          <br />
+          <DatePicker onChange={this.onChange} />
+          <RangePicker />
+        </div>
+
+      </ConfigProvider>
+
+    )
+  }
