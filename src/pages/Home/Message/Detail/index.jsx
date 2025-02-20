@@ -10,7 +10,7 @@ const data = [
 
 export default class Detail extends Component {
   render() {
-    console.log(this.props)
+    console.log("Detail组件接受到的props为: ", this.props)
     //（1）接收到的params参数被传入到了match对象中的params属性中
     // const {id,title} = this.props.match.params 
 

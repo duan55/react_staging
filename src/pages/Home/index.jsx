@@ -17,7 +17,7 @@ export default class Home extends Component {
             <MyNavLink to="/home/news">News</MyNavLink>
           </li>
           <li>
-          <MyNavLink to="/home/message">Message</MyNavLink>
+            <MyNavLink to="/home/message">Message</MyNavLink>
           </li>
         </ul>
         {/* 注册路由 */}
