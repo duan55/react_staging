@@ -895,3 +895,16 @@ witchRouter可以加工一般组件，使得其具备路由组件特有的API；
 ps:
 发现之前的MyNavLink组件点击跳转现在第一次是push之后是replace，直接在其中声明了replace属性，但是第二次点击还是push，不知道为什么
 测试了一下 ：第一次push 那之后replace的原因好像是：params、search都是push，state不知道为什么变replace了
+
+p93 BrowserRouter与HashRouter的区别
+1、底层原理不一样：
+  BrowserRouter使用HTML5的history API，不兼容IE9以下版本  （this.props.history是react对H5的history API的封装）
+  HashRouter使用URL的hash值
+2、path表现形式不一样
+  BrowserRouter的url路径中不会显示#符号，localhost:3000/home/message/detail
+  HashRouter的url路径中会显示#符号，localhost:3000/#/home/message/detail
+3*、刷新后对路由state参数的影响(因为HashRouter没有用上historyAPI)
+  BrowserRouter刷新后会保留state参数(因为state保存在history对象中)，因此刷新后页面会显示之前的状态
+  HashRouter刷新后会导致路由丢失state参数，因此刷新后页面会回到初始状态!!!!!
+4、备注：HashRouter可以用于解决一些路径错误相关的问题
+5、一般情况下B用的多，H只是考虑极端兼容性下使用吧~
