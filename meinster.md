@@ -1002,6 +1002,50 @@ redux可以将共享的信息共享存储，独立与所有组件？
 3.2 一个组件需要改变另一个组件的状态（通信）
 3.3 总体原则：能不用就不用，如果不用比较吃力才考虑使用
 
+p98 redux工作流程 && redux的三个核心概念
+
+redux原理图：在/asserts/8_redux原理图.png
+React-Components:
+Action-Creators: 负责生成Actions对象，包含type和payload(data)属性，type用于描述动作的类型，payload用于传递数据
+Action-Creators ---> dispatch(actionObj) ---> Store
+Store(没有s，就一个): 存储应用的状态，包含应用的全部数据，包括reducers生成的状态；传递更新动作给Reducers，React-Components可以获取Store中的值等
+store --->(previousState, action) ---> Reducer(纯函数) ---> newState ---> Store(更新)
+ps 如果是初始化，那么这个previousState为undefined
+Reducer(纯函数): 负责对Actions进行处理，生成新的状态，并返回给Store; 当第一次启动的时候，他还要负责进行状态的初始化，但是大部分时间都在加工状态
+
+可以发现Action-Creators其作用只是创建一个Object对象其中包含了操作的类型和数据，这个步骤可以自己实现，
+接下来先忽略其自定义action对象，后续完整版再加入Action-Creators这个部分
+
+形象一点：
+React-Components客人 
+Action-Creators服务员 
+Store老板 
+Reducer后厨
+- state账单
+
+1、redux的三个核心概念：
+(1)、action
+1.1 动作对象
+1.2 动作对象包含两个属性：type和payload(data)
+      type：标识属性，值为字符串，唯一，必要属性
+      payload(data)：数据属性，值类型任意，可选属性
+1.3例子：{type: 'ADD_STUDENT', payload: {name: '张三', age: 20}}
+
+(2)、reducer
+2.1 用于初始化状态、加工状态
+2.2 加工时，根据旧的state和action，产生新的state的<纯函数>
+注意：初始化的时候action的type值为'@@init@@',data为空(这个东西压根就不传)，初始化的默认值设定可以预先在reducer中设置
+
+(3)、store
+3.1 将state、action、reducer联系在一起的对象
+3.2 如何得到此对象？
+    1)import {createStore} from 'redux'
+    2)import reducer from './reducers'
+    3)const store = createStore(reducer)
+3.3 此对象的功能？
+    1) getState()：获取当前的state
+    2) dispatch(action)：分发action，触发reducer调用，产生新的state
+    3) subscribe(listener)：注册监听，当产生了新的state时，自动调用  
 
 
 
