@@ -1047,6 +1047,8 @@ Reducer后厨
     2) dispatch(action)：分发action，触发reducer调用，产生新的state
     3) subscribe(listener)：注册监听，当产生了新的state时，自动调用  
 
+p99
+详见另一个项目工程 react_redux
 
 
 
